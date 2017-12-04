@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Inlämingsuppgift 1 (DSA)", "Inlämingsuppgift 1 (DSA)\Inlämingsuppgift 1 (DSA).pyproj", "{308B161B-7D6C-4F83-ABB3-CA6D5330B078}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Inlämingsuppgift 1 (DSA)", "Inlämingsuppgift 1 (DSA)\Inlämingsuppgift 1 (DSA).pyproj", "{69F4B078-C75B-44A8-BCBD-0D8BD7C044DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{308B161B-7D6C-4F83-ABB3-CA6D5330B078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{308B161B-7D6C-4F83-ABB3-CA6D5330B078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69F4B078-C75B-44A8-BCBD-0D8BD7C044DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69F4B078-C75B-44A8-BCBD-0D8BD7C044DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8712B80C-0036-4AAF-89EF-2A5F63A2E328}
+		SolutionGuid = {83BF1375-30E2-4E56-8B72-2C5DB2BC33FE}
 	EndGlobalSection
 EndGlobal
