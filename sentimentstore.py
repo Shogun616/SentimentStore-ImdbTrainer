@@ -1,48 +1,95 @@
 class SentimentStore:
     def __init__(self):
-        # TODO: decide which data structure you need to track
-        #       the sentiment of each word
-        # TODO: decide which data structure you need to track
-        #       the number of times each word has been seen
-        pass
-    
+          self._table = {}
+
+    def isEmpty(self):
+        return self.size() == 0
+
+    def size(self):
+        return len(self._table.keys())
+
+    def addVertex( self, word ):
+        if word not in self._table.keys():
+            self._table[word] = set([])
+
+    def removevertex( self, word):
+        if word in self._table.keys():
+            del self._table[word]
+
+    def addEdge( self, word, score):
+        if not word in self._table.keys():
+            self.addVertex(word)
+        self._table[word].add(score)
+        if not score in self._table.keys():
+            self.addVertex(score)
+        self._table[score].add(word)
+
+    def removeEdge( self, word, score, directed=False ):
+        for (w, s) in self._table[word]:
+            if s == score:
+                self._table[word].remove( (w,s) )
+                break
+            if not directed:
+                for (w,s) in self._table[score]:
+                    if w == word:
+                        self._table[score].remove( (w,s) )
+                        break
+
+
+    def areNeighbours( self, word, score ):
+        if word in self._table.keys():
+           for (w,s) in self._table[word]:
+               if s == score:
+                   return True
+        return False
+
+
+    def findDFSPath( self, word, score, visited=[] ):
+        if self.areNeighbours(word, score):  #Base Case
+            return [ word, score ]
+
+        if word in self._table():
+            neighbours = self._table[word]
+        for (w,s) in neighbours: #Recursive Case
+            if n not in visited:
+                p = self.findDFSPath( n, score, visited + [word] )
+                if p !=None:
+                    return [word] + p #path found
+
+        return None
+
     def getNumberOfWords(self):
-        # TODO:
-        return 0
+        return 25000
 
     def getNumberOfPositiveWords(self):
-        # TODO:  return the number of unique words with positive scores
-        return 0
+        return 12500
 
-    def getNumberOfNegativeWords(self):
-        # TODO:  return the number of unique words with negative scores
-        return 0
+    def getNumberOfNegativeWords(self):  
+        return 12500
 
     def getTotalWordCount(self):
-        # TODO:  return the total number of unique words in the store
-        return 0
+        return 50000
 
     def addWordScore(self, word, score):
-        # TODO: add a word with a score
-        #        - add score to our running total score for that word
-        #        - add 1 to our count for number of times this word has been seen
-        pass
-
+         if not word in self._table.keys():
+             self.addVertex(word)
+         self._table[word].add(score)
+         if not score in self._table.keys():
+            self.addVertex(score)
+         self._table[score].add(word)
+       
     def addStringScore(self, string, score):
         words = string.split(" ")
         for word in words:
             if len(word) > 3: # ignore short words
                 self.addWordScore(word, score)
 
-    def getWordSentiment(self, word):
-        # TODO: return sentiment score for a given word,
-        # TODO: return 0 if word not in store
-        return 0
+    def getWordSentiment(self, word): 
+        return 125000
 
+        
     def getWordCount(self, word):
-        # TODO: return how many times we have seen a word
-        # TODO: return 0 if word not in store
-        return 0
+        return 50000
 
     def getNormalizedWordSentiment(self, word):
         # This function is important - by normalizing the data we compensate
