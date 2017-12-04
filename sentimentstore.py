@@ -1,6 +1,7 @@
 class SentimentStore:
     def __init__(self):
           self._table = {}
+          self._count = {}
 
     def isEmpty(self):
         return self.size() == 0
@@ -12,29 +13,9 @@ class SentimentStore:
         if word not in self._table.keys():
             self._table[word] = set([])
 
-    def removevertex( self, word):
+    def removevertex(self, word):
         if word in self._table.keys():
             del self._table[word]
-
-    def addEdge( self, word, score):
-        if not word in self._table.keys():
-            self.addVertex(word)
-        self._table[word].add(score)
-        if not score in self._table.keys():
-            self.addVertex(score)
-        self._table[score].add(word)
-
-    def removeEdge( self, word, score, directed=False ):
-        for (w, s) in self._table[word]:
-            if s == score:
-                self._table[word].remove( (w,s) )
-                break
-            if not directed:
-                for (w,s) in self._table[score]:
-                    if w == word:
-                        self._table[score].remove( (w,s) )
-                        break
-
 
     def areNeighbours( self, word, score ):
         if word in self._table.keys():
@@ -54,30 +35,31 @@ class SentimentStore:
             if n not in visited:
                 p = self.findDFSPath( n, score, visited + [word] )
                 if p !=None:
-                    return [word] + p #path found
+                    return [score] + p #path found
 
         return None
 
     def getNumberOfWords(self):
-        return 25000
+        return len(self._table.keys())
 
     def getNumberOfPositiveWords(self):
-        return 12500
+        return len(self._count.keys())
 
     def getNumberOfNegativeWords(self):  
-        return 12500
+        return len(self._count.keys())
 
     def getTotalWordCount(self):
-        return 50000
+        return len(self._table.keys())
 
     def addWordScore(self, word, score):
          if not word in self._table.keys():
-             self.addVertex(word)
-         self._table[word].add(score)
-         if not score in self._table.keys():
-            self.addVertex(score)
-         self._table[score].add(word)
-       
+             self._table[word] = score 
+             self._count[word] = 1
+         else:
+             self._count[word] +=1
+             self._table[word] += score
+
+           
     def addStringScore(self, string, score):
         words = string.split(" ")
         for word in words:
@@ -85,11 +67,18 @@ class SentimentStore:
                 self.addWordScore(word, score)
 
     def getWordSentiment(self, word): 
-        return 125000
-
+        try:
+           return self._table[word] 
+        except:
+            return 0
+    
         
     def getWordCount(self, word):
-        return 50000
+        try:
+           return self._count[word]
+        except:
+            return 0
+    
 
     def getNormalizedWordSentiment(self, word):
         # This function is important - by normalizing the data we compensate

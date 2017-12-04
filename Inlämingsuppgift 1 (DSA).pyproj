@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>308b161b-7d6c-4f83-abb3-ca6d5330b078</ProjectGuid>
+    <ProjectGuid>69f4b078-c75b-44a8-bcbd-0d8bd7c044dc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>Inlämingsuppgift_1__DSA_.py</StartupFile>
     <SearchPath>
