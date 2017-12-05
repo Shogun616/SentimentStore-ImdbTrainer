@@ -1,7 +1,7 @@
 class SentimentStore:
     def __init__(self):
-          self._table = {}
-          self._count = {}
+       self._table = {}
+       self._count = {}
 
     def isEmpty(self):
         return self.size() == 0
@@ -9,47 +9,68 @@ class SentimentStore:
     def size(self):
         return len(self._table.keys())
 
-    def addVertex( self, word ):
-        if word not in self._table.keys():
+    def addVertex( self, word):
+        if v not in self._table.keys():
             self._table[word] = set([])
 
-    def removevertex(self, word):
-        if word in self._table.keys():
+    def removevertex( self, word):
+        if v in self._table.keys():
             del self._table[word]
+
+    def addEdge( self, word, score):
+        if not word in self._table.keys():
+            self.addVertex(word)
+        self._table[word].add(score)
+        if not score in self._table.keys():
+            self.addVertex(score)
+        self._table[score].add(word)
+
+    def removeEdge( self, word, score, directed=False ):
+        for (w, s) in self._table[word]:
+            if w == score:
+                self._table[word].remove( (w,s) )
+                break
+            if not directed:
+                for (w,s) in self._table[score]:
+                    if s == word:
+                        self._table[score].remove( (w,s) )
+                        break
 
     def areNeighbours( self, word, score ):
         if word in self._table.keys():
-           for (w,s) in self._table[word]:
-               if s == score:
-                   return True
+            for (w,s) in self._table[word]:
+                if w == score:
+                    return True
         return False
-
-
-    def findDFSPath( self, word, score, visited=[] ):
-        if self.areNeighbours(word, score):  #Base Case
-            return [ word, score ]
-
-        if word in self._table():
-            neighbours = self._table[word]
-        for (w,s) in neighbours: #Recursive Case
-            if n not in visited:
-                p = self.findDFSPath( n, score, visited + [word] )
-                if p !=None:
-                    return [score] + p #path found
-
-        return None
-
+   
     def getNumberOfWords(self):
         return len(self._table.keys())
 
     def getNumberOfPositiveWords(self):
-        return len(self._count.keys())
+        count = 0
 
-    def getNumberOfNegativeWords(self):  
-        return len(self._count.keys())
+        for  p in self._table.values():
+            if p > 0:
+                 count += 1
+        
+        # klar med loopen
+        return count                
+
+    def getNumberOfNegativeWords(self):
+        count = 0
+
+        for n in self._table.values():
+            if n < 0:
+                count += 1
+
+        return count
 
     def getTotalWordCount(self):
-        return len(self._table.keys())
+        count = 0
+        for w in self._count.values():
+            count += w
+        return count
+
 
     def addWordScore(self, word, score):
          if not word in self._table.keys():
@@ -65,6 +86,7 @@ class SentimentStore:
         for word in words:
             if len(word) > 3: # ignore short words
                 self.addWordScore(word, score)
+
 
     def getWordSentiment(self, word): 
         try:
@@ -99,6 +121,8 @@ class SentimentStore:
                 word = word.lower()
                 score += self.getNormalizedWordSentiment(word)
         return score / count
+
+
 
 
 
