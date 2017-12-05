@@ -25,7 +25,9 @@ class IMDBTrainer():
     def train( self, sentiment ):
         # Spola fram till start
         for i in range(self.size):
-            sentiment.addStringScore( self.data[i], self.scores[i] )
+            if i > 1:
+                sentiment.addStringScore( self.data[i-2] + self.data[i-1] + self.data[i], self.scores[i-2] +self.scores[i-1] + self.scores[i] )
+                # En uppdaterad version av def train som läser av mer Imdb data.
 
     def test( self, sentiment ):
         sentiment_sum = 0
@@ -52,6 +54,7 @@ class IMDBTrainer():
         print("Correct: {}%".format( 100*correct/count ) )
         print("Wrong: {}%".format( 100*wrong/count ) )
         print("Uncertain: {}%".format( 100*uncertain/count ) )
+
 
 
 
