@@ -71,7 +71,6 @@ class SentimentStore:
             count += w
         return count
 
-
     def addWordScore(self, word, score):
          if not word in self._table.keys():
              self._table[word] = score 
@@ -87,7 +86,6 @@ class SentimentStore:
             if len(word) > 3: # ignore short words
                 self.addWordScore(word, score)
 
-
     def getWordSentiment(self, word): 
         try:
            return self._table[word] 
@@ -101,7 +99,6 @@ class SentimentStore:
         except:
             return 0
     
-
     def getNormalizedWordSentiment(self, word):
         # This function is important - by normalizing the data we compensate
         # for the fact that some words occurs far more often than others.
@@ -109,7 +106,6 @@ class SentimentStore:
             return self.getWordSentiment(word) / self.getWordCount(word)
         else:
             return 0
-
 
     def getStringSentiment(self, s):
         score = 0
@@ -121,8 +117,3 @@ class SentimentStore:
                 word = word.lower()
                 score += self.getNormalizedWordSentiment(word)
         return score / count
-
-
-
-
-
