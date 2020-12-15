@@ -2,7 +2,6 @@ import time
 
 print( "Creating sentiment storage:" )
 
-
 from sentimentstore import SentimentStore
 sentiment=SentimentStore()
 
@@ -28,5 +27,3 @@ t0 = time.time()
 movies_test.test( sentiment )
 t1 = time.time()
 print("Testing took {:.3f}s".format( t1-t0 ) )
-
-
