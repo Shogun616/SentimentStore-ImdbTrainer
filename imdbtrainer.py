@@ -1,7 +1,6 @@
 import os
 import json
 
-
 class IMDBTrainer():
     def __init__(self, path="aclImdb/train"):
         self.scores = []
@@ -20,7 +19,6 @@ class IMDBTrainer():
                 data = open( os.path.join( path, X, file ), encoding="utf-8" ).read()
                 self.data.append( data )
                 self.size += 1
-
 
     def train( self, sentiment ):
         # Spola fram till start
@@ -54,7 +52,3 @@ class IMDBTrainer():
         print("Correct: {}%".format( 100*correct/count ) )
         print("Wrong: {}%".format( 100*wrong/count ) )
         print("Uncertain: {}%".format( 100*uncertain/count ) )
-
-
-
-
